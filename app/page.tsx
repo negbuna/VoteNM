@@ -74,8 +74,7 @@ export default function Home() {
             priority
             className="object-cover w-full h-full"
           />
-          {/* Overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20" />
         </div>
         {/* Centered Content */}
         <div className="relative z-10 flex flex-col items-center w-full px-4 text-center">
@@ -102,7 +101,7 @@ export default function Home() {
           <p className="text-base md:text-lg text-gray-700 mb-2">
             {isSpanish
               ? 'La fecha límite para solicitar votar por correo en la Elección Local Regular de Nuevo México es el '
-              : 'The deadline to apply to vote by mail for the New Mexico Regular Local Election is '}<span className="font-semibold">{isSpanish ? 'martes 21 de octubre de 2025' : 'Tuesday, October 21, 2025'}</span>{isSpanish ? '.' : '.'}
+              : 'The deadline to apply to vote by mail for the New Mexico Regular Local Election is '}<span className="font-semibold">{isSpanish ? 'martes 7 de octubre de 2025' : 'Tuesday, October 7, 2025'}</span>{isSpanish ? '.' : '.'}
           </p>
           <p className="text-base md:text-lg text-gray-700 mb-4">
             {isSpanish
