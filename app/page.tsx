@@ -1,8 +1,60 @@
 "use client";
+import SiteLayout from "./components/SiteLayout";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo, useState } from "react";
+
+const faqs = [
+  { q: "How does this site work?", a: `This simple mail-in ballot application is accepted by the New Mexico Secretary of State and county clerks. Your completed request is submitted electronically to your county or city registrar. A copy is emailed to you for your records.` },
+  { q: "What’s the difference between an absentee ballot and a mail-in ballot?", a: `There is no difference in New Mexico. These terms are used interchangeably.` },
+  { q: "What if I don’t receive my mail-in ballot?", a: `You can check your ballot status on the New Mexico Voter Information Portal. If it doesn’t arrive or isn’t mailed within a few days, contact your county clerk.` },
+  { q: "Where does my data go?", a: `Your data goes to:\n  • Your local registrar (county or city clerk)\n  • VoteNM (operated by eAbsentee New Mexico)\n  • Optionally, the organization that referred you (if you entered via their link)—they get your name, contact info, and date, but not your SSN digits.\nThis helps campaign groups track outreach effectiveness while preserving your privacy.` },
+  { q: "Why does VoteNM share partial info with referring organizations?", a: `Campaigns and voter outreach groups use this limited data to measure impact and send reminders. They never receive sensitive info like your SSN.` },
+  { q: "What changes have been made to the mail-in voting process?", a: `In 2020, New Mexico passed new laws allowing no-excuse mail-in voting and extending registration deadlines. Ballots postmarked by Election Day are counted. Our form has been updated to cleanly reflect these changes for NM voters.` },
+  { q: "Can anyone receive a mail-in ballot?", a: `Yes. All registered New Mexico voters are eligible to request a mail-in ballot. No excuse is required.` },
+  { q: "When will I receive my mail-in ballot?", a: `Ballot applications can be submitted anytime before the deadline (14 days before Election Day). Ballots are mailed about 28–45 days before elections.` }
+];
+
+function FaqAccordion() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <section className="max-w-2xl mx-auto my-12 px-4">
+      <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+      <div className="divide-y divide-gray-200 rounded-2xl shadow bg-white">
+        {faqs.map((faq, i) => (
+          <div key={i}>
+            <button
+              className="w-full text-left px-6 py-5 focus:outline-none focus:bg-gray-100 flex justify-between items-center"
+              aria-expanded={open === i}
+              aria-controls={`faq-panel-${i}`}
+              onClick={() => setOpen(open === i ? null : i)}
+              type="button"
+            >
+              <span className="font-semibold text-lg text-gray-900">{faq.q}</span>
+              <span className="ml-4 text-gray-400">{open === i ? "−" : "+"}</span>
+            </button>
+            <div
+              id={`faq-panel-${i}`}
+              className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${open === i ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 pb-0 opacity-0'}`}
+              style={{ pointerEvents: open === i ? 'auto' : 'none' }}
+              aria-hidden={open !== i}
+            >
+              {open === i && (
+                <div className="text-gray-700 whitespace-pre-line">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="text-xs text-gray-400 mt-4 text-center">
+        Source: <a href="https://www.sos.nm.gov/" className="underline" target="_blank" rel="noopener">New Mexico Secretary of State</a>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -10,65 +62,13 @@ export default function Home() {
   const currentLang = isSpanish ? "Español" : "English";
 
   return (
-    <main
-      className="min-h-screen flex flex-col"
-      style={{ backgroundColor: "#FDFAEC" }}
-    >
-      {/* Header */}
-      <header className="w-full flex justify-between items-center px-6 py-4 border-b border-gray-200 sticky top-0 z-10" style={{ backgroundColor: "#FDFAEC" }}>
-        <div className="flex items-center gap-1">
-          <div className="w-20 h-20 bg-[#FDFAEC] rounded-md flex items-center justify-center mr-1 overflow-hidden"> {/* removed border class */}
-            <Image
-              src="/logo.svg"
-              alt="VoteNM Logo"
-              width={160}
-              height={160}
-              className="object-cover object-center w-20 h-20"
-              priority
-            />
-          </div>
-          <span className="font-extrabold text-2xl text-black tracking-tight">
-            VoteNM
-          </span>
-        </div>
-        <nav className="flex items-center gap-6 text-sm">
-          <Link
-            href="https://www.sos.nm.gov/"
-            target="_blank"
-            rel="noopener"
-            className="hover:underline text-gray-700"
-          >
-            NM Secretary of State
-          </Link>
-          {/* Language Dropdown */}
-          <div className="relative flex items-center">
-            <select
-              id="language-select"
-              className="appearance-none bg-transparent px-1 py-1 text-gray-700 focus:outline-none cursor-pointer"
-              onChange={e => {
-                if (e.target.value === 'es') {
-                  window.location.search = '?lang=es';
-                } else {
-                  window.location.search = '';
-                }
-              }}
-              value={isSpanish ? 'es' : 'en'}
-              style={{ minWidth: 0 }}
-            >
-              <option value={isSpanish ? 'es' : 'en'}>{currentLang}</option>
-              <option value={isSpanish ? 'en' : 'es'}>{isSpanish ? 'English' : 'Español'}</option>
-            </select>
-            <span className="ml-1 text-gray-400 pointer-events-none select-none">▼</span>
-          </div>
-        </nav>
-      </header>
-
+    <SiteLayout>
       {/* Hero Section with overlayed tagline and button */}
       <section className="relative w-full h-[60vh] min-h-[340px] flex items-center justify-center overflow-hidden">
-        {/* Background image (nm.webp) */}
+        {/* Background image (nm2.webp) */}
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/nm.webp"
+            src="/nm2.webp"
             alt="New Mexico landscape"
             fill
             priority
@@ -94,51 +94,41 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
       {/* Info Box Section */}
       <section className="flex flex-col items-center justify-center px-4 py-10">
         <div className="rounded-2xl shadow-lg p-6 md:p-8 max-w-2xl w-full text-center bg-white">
           <p className="text-base md:text-lg text-gray-700 mb-2">
             {isSpanish
-              ? 'La fecha límite para solicitar votar por correo en la Elección Local Regular de Nuevo México es el '
-              : 'The deadline to apply to vote by mail for the New Mexico Regular Local Election is '}<span className="font-semibold">{isSpanish ? 'martes 7 de octubre de 2025' : 'Tuesday, October 7, 2025'}</span>{isSpanish ? '.' : '.'}
+              ? 'Su secretario del condado debe recibir su solicitud de boleta por correo a más tardar 14 días antes del Día de las Elecciones, según lo exige la ley de Nuevo México.'
+              : 'Your local county clerk must receive your mail-in ballot request no later than 14 days before Election Day, as required by New Mexico law.'}
           </p>
-          <p className="text-base md:text-lg text-gray-700 mb-4">
+          <p className="text-base md:text-lg text-gray-700 mb-2">
             {isSpanish
-              ? 'Se recomienda solicitar lo antes posible para evitar posibles retrasos.'
-              : 'You are encouraged to apply as early as possible to reduce any potential delays.'}
+              ? 'Para la Elección Local Regular de 2025, la fecha límite para solicitar una boleta es el martes 21 de octubre de 2025.'
+              : 'For the 2025 Regular Local Election, the deadline to request a ballot is Tuesday, October 21, 2025.'}
+          </p>
+          <p className="text-base md:text-lg text-gray-700 mb-2">
+            {isSpanish
+              ? 'No espere: las solicitudes anticipadas le dan más tiempo para recibir, completar y devolver su boleta.'
+              : 'Don’t wait—earlier applications give you more time to receive, complete, and return your ballot.'}
           </p>
           <p className="text-base md:text-lg text-gray-700">
             {isSpanish
-              ? 'Si desea verificar el estado de su solicitud previamente enviada, visite el '
-              : 'If you want to check on the status of your previously submitted application, please visit the '}
+              ? 'Si ya ha enviado una solicitud y desea verificar su estado, visite el Portal de Información para Votantes de Nuevo México.'
+              : 'If you’ve already submitted an application and want to check its status, visit the New Mexico Voter Information Portal.'}
             <a
               href="https://www.sos.nm.gov/voting-and-elections/voter-information-portal-nmvote-org/absentee-and-early-voting/"
               target="_blank"
               rel="noopener"
-              className="text-[#005cf0] underline hover:text-blue-700"
+              className="text-[#005cf0] underline hover:text-blue-700 ml-1"
             >
-              {isSpanish ? 'portal de votantes de Nuevo México' : 'New Mexico voter portal.'}
+              {isSpanish ? '' : 'New Mexico Voter Information Portal'}
             </a>
             .
           </p>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="w-full flex flex-col md:flex-row items-center justify-between border-t border-gray-200 px-6 py-6 text-xs text-gray-500 mt-auto" style={{ backgroundColor: "#FDFAEC" }}>
-        <div className="mb-2 md:mb-0">
-          &copy; {new Date().getFullYear()} VoteNM. All rights reserved.
-        </div>
-        <nav className="flex gap-4">
-          <Link href="/about" className="hover:underline">
-            About
-          </Link>
-          <Link href="/contact" className="hover:underline">
-            Contact
-          </Link>
-        </nav>
-      </footer>
-    </main>
+      <FaqAccordion />
+    </SiteLayout>
   );
 }
