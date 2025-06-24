@@ -4,6 +4,9 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import Notification from "../components/Notification";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 const faqs = [
   {
@@ -104,7 +107,7 @@ function FaqAccordion() {
   if (isSpanish === null) return null;
 
   return (
-    <section className="max-w-2xl mx-auto my-12 px-4">
+    <section id="faq" className="max-w-2xl mx-auto my-12 px-4">
       <h2 className="text-2xl font-bold mb-6 text-center text-black">
         {isSpanish ? "Preguntas Frecuentes" : "Frequently Asked Questions"}
       </h2>
@@ -162,6 +165,19 @@ export default function Home() {
   const searchParams = useSearchParams();
   const isSpanish = searchParams.get("lang") === "es";
   const currentLang = isSpanish ? "Español" : "English";
+  const [showNotif, setShowNotif] = useState(false);
+  const router = useRouter();
+
+  const handleApply = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    const supabase = createClient();
+    const { data } = await supabase.auth.getUser();
+    if (!data.user) {
+      setShowNotif(true);
+    } else {
+      router.push("/apply");
+    }
+  };
 
   return (
     <SiteLayout>
@@ -179,22 +195,27 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20" />
         </div>
         {/* Centered Content */}
-        <div className="relative z-10 flex flex-col items-center w-full px-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg mb-4">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 text-center">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg mb-4 w-full text-center">
             VoteNM
           </h1>
-          <p className="text-lg md:text-2xl text-white max-w-xl mx-auto mb-6">
+          <p className="text-lg md:text-2xl text-white max-w-xl mx-auto mb-6 w-full text-center">
             {isSpanish
               ? "Ayudando a los habitantes de Nuevo México a votar por correo—de manera clara, segura y a tiempo."
               : "Helping New Mexicans vote by mail—clearly, securely, and on time."}
           </p>
-          <Link
-            href="/apply"
-            className="inline-flex items-center justify-center rounded-md bg-[#005cf0] text-white px-8 py-3 text-base font-semibold shadow hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors"
+          <button
+            onClick={handleApply}
+            className="inline-flex items-center justify-center rounded-md bg-[#005cf0] text-white px-8 py-3 text-base font-semibold shadow hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors w-auto mx-auto"
           >
             {isSpanish ? "Solicitar" : "Apply"}
-          </Link>
+          </button>
         </div>
+        <Notification
+          show={showNotif}
+          message={isSpanish ? "Por favor, cree una cuenta para solicitar" : "Please create an account to apply"}
+          onClose={() => setShowNotif(false)}
+        />
       </section>
       {/* Info Box Section */}
       <section className="flex flex-col items-center justify-center px-4 py-10">

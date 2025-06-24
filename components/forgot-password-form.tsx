@@ -17,8 +17,13 @@ import { useState } from "react";
 
 export function ForgotPasswordForm({
   className,
+  isSpanish = false,
+  langParam = "",
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  isSpanish?: boolean;
+  langParam?: string;
+}) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -49,51 +54,75 @@ export function ForgotPasswordForm({
       {success ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
+            <CardTitle className="text-2xl">
+              {isSpanish
+                ? "Revisa tu correo electrónico"
+                : "Check Your Email"}
+            </CardTitle>
+            <CardDescription>
+              {isSpanish
+                ? "Te enviamos instrucciones para restablecer tu contraseña"
+                : "Password reset instructions sent"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive
-              a password reset email.
+              {isSpanish
+                ? "Si te registraste usando tu correo y contraseña, recibirás un correo para restablecer tu contraseña."
+                : "If you registered using your email and password, you will receive a password reset email."}
             </p>
           </CardContent>
         </Card>
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
+            <CardTitle className="text-2xl">
+              {isSpanish ? "Restablecer contraseña" : "Reset Your Password"}
+            </CardTitle>
             <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your
-              password
+              {isSpanish
+                ? "Por favor ingresa tu correo para restablecer tu contraseña"
+                : "Type in your email and we'll send you a link to reset your password"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleForgotPassword}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-muted-foreground">
+                    {isSpanish ? "Correo electrónico" : "Email"}
+                  </Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder={
+                      isSpanish
+                        ? "Ingresa tu correo electrónico"
+                        : "m@example.com"
+                    }
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending..." : "Send reset email"}
+                <Button type="submit" className="w-full md:w-auto bg-[#005cf0] text-white font-semibold rounded px-6 py-3 shadow hover:bg-blue-700 transition-colors" disabled={isLoading}>
+                  {isSpanish
+                    ? isLoading
+                      ? "Enviando..."
+                      : "Enviar correo de restablecimiento"
+                    : isLoading
+                      ? "Sending..."
+                      : "Send reset email"}
                 </Button>
               </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
+              <div className="mt-4 text-center text-sm text-muted-foreground">
+                {isSpanish ? "¿Ya tienes una cuenta?" : "Already have an account?"}{" "}
                 <Link
-                  href="/auth/login"
-                  className="underline underline-offset-4"
+                  href={`/auth/login${langParam}`}
+                  className="underline underline-offset-4 text-blue-600 hover:text-blue-700 font-medium"
                 >
-                  Login
+                  {isSpanish ? "Iniciar sesión" : "Login"}
                 </Link>
               </div>
             </form>
