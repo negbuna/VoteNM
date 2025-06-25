@@ -45,30 +45,10 @@ const faqs = [
       es: "¿A dónde va mi información?",
     },
     a: {
-      en: `Your data goes to:\n  • Your local registrar (county or city clerk)\n  • VoteNM (operated by eAbsentee New Mexico)\n  • Optionally, the organization that referred you (if you entered via their link)—they get your name, contact info, and date, but not your SSN digits.\nThis helps campaign groups track outreach effectiveness while preserving your privacy.`,
-      es: `Su información va a:\n  • Su registrador local (secretario del condado o ciudad)\n  • VoteNM (operado por eAbsentee New Mexico)\n  • Opcionalmente, la organización que lo refirió (si ingresó a través de su enlace): reciben su nombre, información de contacto y fecha, pero no los dígitos de su SSN.\nEsto ayuda a los grupos de campaña a medir el alcance sin comprometer su privacidad.`,
+      en: `We only use the data you provide to fill out New Mexico's absentee form on your behalf and send it to your local registrar (county or city clerk). We delete your data afterwards.`,
+      es: `Solo usamos la información que proporcionas para completar la solicitud de voto ausente de Nuevo México en tu nombre y enviarla a tu registrador local (secretario del condado o ciudad). Eliminamos tu información después.`,
     },
-  },
-  {
-    q: {
-      en: "Why does VoteNM share partial info with referring organizations?",
-      es: "¿Por qué VoteNM comparte información parcial con organizaciones que refieren?",
-    },
-    a: {
-      en: `Campaigns and voter outreach groups use this limited data to measure impact and send reminders. They never receive sensitive info like your SSN.`,
-      es: `Las campañas y los grupos de alcance utilizan estos datos limitados para medir el impacto y enviar recordatorios. Nunca reciben información sensible como su SSN.`,
-    },
-  },
-  {
-    q: {
-      en: "What changes have been made to the mail-in voting process?",
-      es: "¿Qué cambios se han hecho en el proceso de votación por correo?",
-    },
-    a: {
-      en: `In 2020, New Mexico passed new laws allowing no-excuse mail-in voting and extending registration deadlines. Ballots postmarked by Election Day are counted. Our form has been updated to cleanly reflect these changes for NM voters.`,
-      es: `En 2020, Nuevo México aprobó nuevas leyes que permiten votar por correo sin excusa y extendieron los plazos de registro. Las boletas con matasellos del Día de las Elecciones se cuentan. Nuestro formulario se ha actualizado para reflejar estos cambios para los votantes de NM.`,
-    },
-  },
+  },  
   {
     q: {
       en: "Can anyone receive a mail-in ballot?",

@@ -14,7 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export function LoginForm({
   className,
@@ -29,6 +30,8 @@ export function LoginForm({
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<any>(null);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -36,11 +39,16 @@ export function LoginForm({
     const supabase = createClient();
     setIsLoading(true);
     setError(null);
-
+    if (!captchaToken) {
+      setError("Please complete the CAPTCHA");
+      setIsLoading(false);
+      return;
+    }
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
+        options: { captchaToken },
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
@@ -49,6 +57,8 @@ export function LoginForm({
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsLoading(false);
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken(null);
     }
   };
 
@@ -109,6 +119,13 @@ export function LoginForm({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="border border-gray-300 rounded px-4 py-2 w-full bg-white placeholder:text-gray-400 text-gray-900 text-base"
+            />
+          </div>
+          <div className="flex flex-col items-center my-4">
+            <HCaptcha
+              sitekey="8aa07000-9e46-4860-b22a-f15c876c53d0"
+              onVerify={setCaptchaToken}
+              ref={captchaRef}
             />
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
