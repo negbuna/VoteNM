@@ -1,10 +1,19 @@
 "use client";
 
+import React, { Suspense } from "react";
 import SiteLayout from "../../components/SiteLayout";
 import { ForgotPasswordForm } from "@/components/forgot-password-form";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ForgotPasswordPageContent />
+    </Suspense>
+  );
+}
+
+function ForgotPasswordPageContent() {
   const searchParams = useSearchParams();
   const isSpanish = searchParams.get("lang") === "es";
   const langParam = isSpanish ? "?lang=es" : "";

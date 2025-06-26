@@ -1,8 +1,9 @@
 "use client";
+import React, { Suspense } from "react";
 import SiteLayout from "../../components/SiteLayout";
 import { useSearchParams } from "next/navigation";
 
-export default function Page() {
+function SignUpSuccessPageContent() {
   const searchParams = useSearchParams();
   const isSpanish = searchParams.get("lang") === "es";
   return (
@@ -24,5 +25,13 @@ export default function Page() {
         </div>
       </div>
     </SiteLayout>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpSuccessPageContent />
+    </Suspense>
   );
 }

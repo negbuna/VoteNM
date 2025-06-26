@@ -3,7 +3,7 @@ import SiteLayout from "./components/SiteLayout";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import Notification from "../components/Notification";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ const faqs = [
       en: `We only use the data you provide to fill out New Mexico's absentee form on your behalf and send it to your local registrar (county or city clerk). We delete your data afterwards.`,
       es: `Solo usamos la información que proporcionas para completar la solicitud de voto ausente de Nuevo México en tu nombre y enviarla a tu registrador local (secretario del condado o ciudad). Eliminamos tu información después.`,
     },
-  },  
+  },
   {
     q: {
       en: "Can anyone receive a mail-in ballot?",
@@ -141,7 +141,7 @@ function FaqAccordion() {
   );
 }
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const isSpanish = searchParams.get("lang") === "es";
   const currentLang = isSpanish ? "Español" : "English";
@@ -250,7 +250,7 @@ export default function Home() {
               </>
             )}
             <a
-              href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253AVoter%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256"
+              href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253Aviator%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256"
               target="_blank"
               rel="noopener"
               className="text-[#005cf0] underline hover:text-blue-700 ml-1"
@@ -263,5 +263,13 @@ export default function Home() {
       </section>
       <FaqAccordion />
     </SiteLayout>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

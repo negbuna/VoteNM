@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams, usePathname } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { Suspense, ReactNode, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useSearchParams, usePathname } from "next/navigation";
 
 const navLinks = [
     { href: "/", en: "Home", es: "Inicio" },
@@ -38,7 +38,7 @@ function AuthNav({ isSpanish, langParam }: { isSpanish: boolean, langParam: stri
     );
 }
 
-export default function SiteLayout({ children }: { children: ReactNode }) {
+function SiteLayoutContent({ children }: { children: ReactNode }) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const isSpanish = searchParams.get("lang") === "es";
@@ -141,5 +141,13 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                 </nav>
             </footer>
         </main>
+    );
+}
+
+export default function SiteLayout({ children }: { children: ReactNode }) {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SiteLayoutContent>{children}</SiteLayoutContent>
+        </Suspense>
     );
 }

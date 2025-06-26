@@ -1,10 +1,11 @@
 "use client";
 
+import React, { Suspense } from "react";
 import SiteLayout from "../../components/SiteLayout";
 import { UpdatePasswordForm } from "@/components/update-password-form";
 import { useSearchParams } from "next/navigation";
 
-export default function Page() {
+function UpdatePasswordPageContent() {
   const searchParams = useSearchParams();
   const isSpanish = searchParams.get("lang") === "es";
   const langParam = isSpanish ? "?lang=es" : "";
@@ -16,5 +17,13 @@ export default function Page() {
         </div>
       </div>
     </SiteLayout>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UpdatePasswordPageContent />
+    </Suspense>
   );
 }
