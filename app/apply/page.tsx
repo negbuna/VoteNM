@@ -2,7 +2,7 @@
 import SiteLayout from "../components/SiteLayout";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { fillAbsenteeForm } from "@/lib/fillAbsenteeForm";
 import PdfPreview from "./PdfPreview";
@@ -68,6 +68,14 @@ function Tooltip({ text }: { text: string }) {
 }
 
 export default function ApplyPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ApplyPageContent />
+        </Suspense>
+    );
+}
+
+function ApplyPageContent() {
     const searchParams = useSearchParams();
     const isSpanish = searchParams.get("lang") === "es";
     const [firstName, setFirstName] = useState("");
