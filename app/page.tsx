@@ -242,21 +242,20 @@ export default function Home() {
             {isSpanish ? (
               <>
                 Si ya ha enviado una solicitud y desea verificar su estado, visite el
-                Portal de Información para Votantes de Nuevo México.
               </>
             ) : (
               <>
                 If you’ve already submitted an application and want to check its
-                status, visit the New Mexico Voter Information Portal.
+                status, visit the
               </>
             )}
             <a
-              href="https://www.sos.nm.gov/voting-and-elections/voter-information-portal-nmvote-org/absentee-and-early-voting/"
+              href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253AVoter%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256"
               target="_blank"
               rel="noopener"
               className="text-[#005cf0] underline hover:text-blue-700 ml-1"
             >
-              {isSpanish ? "" : "New Mexico Voter Information Portal"}
+              {isSpanish ? "Portal de seguimiento de votos de Nuevo México" : "New Mexico Ballot Tracking Portal"}
             </a>
             .
           </p>

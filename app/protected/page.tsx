@@ -11,6 +11,13 @@ export default async function ProtectedPage() {
   if (error || !data?.user) {
     redirect("/auth/login");
   }
+  
+  // So only I can view lol
+  const allowedUserId = "a4103dee-76f5-4997-9ec2-165e43ae4cc1";
+  const allowedEmail = "egbunanathan@gmail.com";
+  if (data.user.id !== allowedUserId && data.user.email !== allowedEmail) {
+    redirect("/");
+  }
 
   return (
     <div className="flex-1 w-full flex flex-col gap-12">

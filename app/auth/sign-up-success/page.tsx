@@ -1,3 +1,4 @@
+"use client";
 import SiteLayout from "../../components/SiteLayout";
 import { useSearchParams } from "next/navigation";
 
