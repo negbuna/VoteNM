@@ -136,8 +136,7 @@ function SiteLayoutContent({ children }: { children: ReactNode }) {
             {/* Footer */}
             <footer className="w-full flex flex-col md:flex-row items-center justify-between border-t border-gray-200 px-6 py-6 text-xs text-gray-500 mt-auto" style={{ backgroundColor: "#FDFAEC" }}>
                 <nav className="flex gap-8 text-sm">
-                    <Link href={`/about${langParam}`} className="hover:underline">{isSpanish ? "Acerca de" : "About"}</Link>
-                    <Link href={`/contact${langParam}`} className="hover:underline">{isSpanish ? "Contacto" : "Contact"}</Link>
+                    <a href="mailto:votenmhelp@gmail.com" className="hover:underline">{isSpanish ? "Contacto" : "Contact"}</a>
                 </nav>
             </footer>
         </main>
