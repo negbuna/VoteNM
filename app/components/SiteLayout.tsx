@@ -30,7 +30,7 @@ function AuthNav({ isSpanish, langParam }: { isSpanish: boolean, langParam: stri
         router.push(`/${langParam}`);
     };
     return user ? (
-        <Button onClick={handleLogout} variant="outline" className="ml-6 text-black font-medium">{isSpanish ? "Cerrar sesión" : "Logout"}</Button>
+        <Button onClick={handleLogout} className="bg-white text-black border border-gray-300 hover:bg-gray-100 ml-6 font-medium">{isSpanish ? "Cerrar sesión" : "Logout"}</Button>
     ) : (
         <Link href={`/auth/login${langParam}`} className="text-black font-medium hover:underline ml-6">
             {isSpanish ? "Iniciar sesión" : "Login"}
