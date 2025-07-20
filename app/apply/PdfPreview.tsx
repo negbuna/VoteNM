@@ -55,7 +55,7 @@ export default function PdfPreview({ formData }: PdfPreviewProps) {
                 <div className="text-gray-500 mb-4">Generating PDF preview...</div>
             )}
             <div className="flex flex-col items-center gap-4 mt-4">
-                <label className="flex items-center gap-2">
+                <label className="flex items-center gap-2 text-black">
                     <input
                         type="checkbox"
                         checked={sendOnBehalf}
