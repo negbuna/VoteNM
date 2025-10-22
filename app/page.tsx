@@ -181,8 +181,8 @@ function HomeContent() {
           </h1>
           <p className="text-lg md:text-2xl text-white max-w-xl mx-auto mb-6 w-full text-center">
             {isSpanish
-              ? "Ayudando a los habitantes de Nuevo México a votar por correo—de manera clara, segura y a tiempo."
-              : "Helping New Mexicans vote by mail—clearly, securely, and on time."}
+              ? "Ayudando a los habitantes de Nuevo México a votar por correo de manera clara, segura y a tiempo."
+              : "Helping New Mexicans vote by mail clearly, securely, and on time."}
           </p>
           <button
             onClick={handleApply}
@@ -220,23 +220,21 @@ function HomeContent() {
             {isSpanish ? (
               <>
                 Para la Elección Local Regular de 2025, la fecha límite para
-                solicitar una boleta es el{" "}
-                <span className="font-semibold">martes 21 de octubre de 2025</span>
-                .
+                solicitar una boleta fue el <span className="font-semibold">martes 21 de octubre de 2025</span>, y esa fecha ya ha pasado.
               </>
             ) : (
               <>
-                For the 2025 Regular Local Election, the deadline to request a ballot
-                is{" "}
-                <span className="font-semibold">Tuesday, October 21, 2025</span>
-                .
+                For the 2025 Regular Local Election, the deadline to request a ballot was <span className="font-semibold">Tuesday, October 21, 2025</span>, and that deadline has now passed.
               </>
             )}
           </p>
           <p className="text-base md:text-lg text-gray-700 mb-2">
             {isSpanish
-              ? "No espere: las solicitudes anticipadas le dan más tiempo para recibir, completar y devolver su boleta."
-              : "Don’t wait—earlier applications give you more time to receive, complete, and return your ballot."}
+              ? (
+                <>La Elección Local Regular tendrá lugar el <span className="font-semibold">martes 4 de noviembre de 2025</span>. Si ya solicitó una boleta, verifique su estado con su registrador local o el portal de seguimiento; si no, contacte a su secretario de condado para opciones de última hora.</>
+              ) : (
+                <>Election Day for the Regular Local Election is <span className="font-semibold">Tuesday, November 4, 2025</span>. If you already submitted an application, check your status with your local registrar or the ballot tracking portal; if you did not, contact your county clerk for last‑minute options.</>
+              )}
           </p>
           <p className="text-base md:text-lg text-gray-700">
             {isSpanish ? (
