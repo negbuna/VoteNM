@@ -199,64 +199,76 @@ function HomeContent() {
       </section>
       {/* Info Box Section */}
       <section className="flex flex-col items-center justify-center px-4 py-10">
-        <div className="rounded-2xl shadow-lg p-6 md:p-8 max-w-2xl w-full text-center bg-white">
-          <p className="text-base md:text-lg text-gray-700 mb-2">
-            {isSpanish ? (
-              <>
-                Su secretario del condado debe recibir su solicitud de boleta por
-                correo{" "}
-                <span className="font-semibold">a más tardar 14 días</span> antes
-                del Día de las Elecciones, según lo exige la ley de Nuevo México.
-              </>
-            ) : (
-              <>
-                Your local county clerk must receive your mail-in ballot request{" "}
-                <span className="font-semibold">no later than 14 days</span> before
-                Election Day, as required by New Mexico law.
-              </>
-            )}
-          </p>
-          <p className="text-base md:text-lg text-gray-700 mb-2">
-            {isSpanish ? (
-              <>
-                Para la Elección Local Regular de 2025, la fecha límite para
-                solicitar una boleta fue el <span className="font-semibold">martes 21 de octubre de 2025</span>, y esa fecha ya ha pasado.
-              </>
-            ) : (
-              <>
-                For the 2025 Regular Local Election, the deadline to request a ballot was <span className="font-semibold">Tuesday, October 21, 2025</span>, and that deadline has now passed.
-              </>
-            )}
-          </p>
-          <p className="text-base md:text-lg text-gray-700 mb-2">
-            {isSpanish
-              ? (
-                <>La Elección Local Regular tendrá lugar el <span className="font-semibold">martes 4 de noviembre de 2025</span>. Si ya solicitó una boleta, verifique su estado con su registrador local o el portal de seguimiento; si no, contacte a su secretario de condado para opciones de última hora.</>
+        <div className="rounded-2xl shadow-lg p-6 md:p-8 max-w-2xl w-full text-left bg-white">
+          <div className="text-gray-700 space-y-4">
+            <p className="text-base md:text-lg">
+              {isSpanish ? (
+                <>
+                  El periodo electoral de 2025 ha terminado, pero las solicitudes de
+                  boleta por correo se reabrirán pronto para ciclos futuros. Puede
+                  seguir preparándose y generar su formulario oficial de boleta por
+                  correo aquí en cualquier momento.
+                </>
               ) : (
-                <>Election Day for the Regular Local Election is <span className="font-semibold">Tuesday, November 4, 2025</span>. If you already submitted an application, check your status with your local registrar or the ballot tracking portal; if you did not, contact your county clerk for last‑minute options.</>
+                <>
+                  The 2025 election period has ended, but absentee ballot requests
+                  will reopen soon for future cycles. You can continue preparing
+                  and generate your official mail-in form here any time.
+                </>
               )}
-          </p>
-          <p className="text-base md:text-lg text-gray-700">
-            {isSpanish ? (
-              <>
-                Si ya ha enviado una solicitud y desea verificar su estado, visite el
-              </>
-            ) : (
-              <>
-                If you’ve already submitted an application and want to check its
-                status, visit the
-              </>
-            )}
-            <a
-              href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253Aviator%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256"
-              target="_blank"
-              rel="noopener"
-              className="text-[#005cf0] underline hover:text-blue-700 ml-1"
-            >
-              {isSpanish ? "Portal de seguimiento de votos de Nuevo México" : "New Mexico Ballot Tracking Portal"}
-            </a>
-            .
-          </p>
+            </p>
+
+            <div>
+              <h3 className="font-semibold mb-2 text-gray-800">{isSpanish ? "Próximas elecciones estatales:" : "Next statewide elections:"}</h3>
+              <ul className="list-disc list-inside text-base md:text-lg text-gray-700 space-y-1">
+                {isSpanish ? (
+                  <>
+                    <li>Elección de funcionarios municipales - 3 de marzo de 2026</li>
+                    <li>Elección primaria - 2 de junio de 2026</li>
+                    <li>Elección general - 3 de noviembre de 2026</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Municipal Officer Election - March 3, 2026</li>
+                    <li>Primary Election - June 2, 2026</li>
+                    <li>General Election - November 3, 2026</li>
+                  </>
+                )}
+              </ul>
+            </div>
+
+            <p className="text-base md:text-lg">
+              {isSpanish ? (
+                <>
+                  Según la ley de Nuevo México, su secretario del condado debe
+                  recibir una solicitud de boleta por correo <span className="font-semibold">a más tardar 14 días</span> antes del Día de las Elecciones,
+                  por lo que la ventana recomendada para solicitar comienza a
+                  principios de 2026.
+                </>
+              ) : (
+                <>
+                  Under New Mexico law, your county clerk must receive an absentee
+                  ballot request <span className="font-semibold">no later than 14 days</span> before
+                  Election Day, so the recommended request window begins early
+                  2026.
+                </>
+              )}
+            </p>
+
+            <p className="text-base md:text-lg">
+              {isSpanish ? (
+                <>
+                  Si envió una boleta en una elección anterior y desea rastrearla,
+                  visite el <a href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253Aviator%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256" target="_blank" rel="noopener" className="text-[#005cf0] underline hover:text-blue-700">Portal de Seguimiento de Boletas de Nuevo México</a> o comuníquese directamente con el secretario de su condado.
+                </>
+              ) : (
+                <>
+                  If you submitted a ballot for a previous election and want to
+                  track it, visit the <a href="https://app.enhancedvoting.com/login/Voter/Account/Login2?returnUrl=%2Flogin%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dcore.voter.frontend%26scope%3Dopenid%2520profile%2520offline_access%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fapp.enhancedvoting.com%252Fvoter%252Fapi%252Fauth%252Fcallback%26acr_values%3Dusertype%253Aviator%2520voterLoginMode%253Alight%2520shortName%253Anewmexico%26code_challenge%3DG1Kyj-6n3ZYACaO7PWFvh9dDKk6kBY7jeQoZ1GS3i3A%26code_challenge_method%3DS256" target="_blank" rel="noopener" className="text-[#005cf0] underline hover:text-blue-700">New Mexico Ballot Tracking Portal</a> or contact your county clerk directly.
+                </>
+              )}
+            </p>
+          </div>
         </div>
       </section>
       <FaqAccordion />
