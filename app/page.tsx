@@ -204,16 +204,14 @@ function HomeContent() {
             <p className="text-base md:text-lg">
               {isSpanish ? (
                 <>
-                  El periodo electoral de 2025 ha terminado, pero las solicitudes de
-                  boleta por correo se reabrirán pronto para ciclos futuros. Puede
-                  seguir preparándose y generar su formulario oficial de boleta por
-                  correo aquí en cualquier momento.
+                  Las solicitudes de boleta por correo para el ciclo electoral de 2026 ya están
+                  abiertas; puede preparar y enviar su formulario oficial de
+                  boleta por correo aquí ahora.
                 </>
               ) : (
                 <>
-                  The 2025 election period has ended, but absentee ballot requests
-                  will reopen soon for future cycles. You can continue preparing
-                  and generate your official mail-in form here any time.
+                  Absentee ballot requests for the 2026 election cycle are now open; you can prepare and submit
+                  your official mail-in form here now.
                 </>
               )}
             </p>
@@ -242,15 +240,13 @@ function HomeContent() {
                 <>
                   Según la ley de Nuevo México, su secretario del condado debe
                   recibir una solicitud de boleta por correo <span className="font-semibold">a más tardar 14 días</span> antes del Día de las Elecciones,
-                  por lo que la ventana recomendada para solicitar comienza a
-                  principios de 2026.
+                  por lo que la ventana recomendada para solicitar está abierta ahora.
                 </>
               ) : (
                 <>
                   Under New Mexico law, your county clerk must receive an absentee
                   ballot request <span className="font-semibold">no later than 14 days</span> before
-                  Election Day, so the recommended request window begins early
-                  2026.
+                  Election Day, so the recommended request window is open now.
                 </>
               )}
             </p>
